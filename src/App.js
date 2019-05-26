@@ -7,19 +7,15 @@ import TodosData from './components/TodosData'
 import TodoTask from './components/TodoTask';
 
 function App() {
-  const completedStyle={
-    fontStyle:"italic",
-    color:"#cdcdcd",
-    textDecoration:"line-through"
-}
 
-TodosData.push({id:7,text:"did it work",completed:false})
-  const todosData= TodosData.map((item,i)=> <TodoTask style={item.completed ? completedStyle:null} key={item.id} element={item} completed={item.completed}/>)
+
+//TodosData.push({id:7,text:"did it work",completed:false})
+ 
   return (
     <div>
 <TodoList/>
 
-  {todosData}
+  
   
   
     </div>

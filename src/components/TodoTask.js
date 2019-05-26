@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
 import InputGroup from 'react-bootstrap/InputGroup'
-import TodosData from './TodosData'
 import ListGroup from 'react-bootstrap/ListGroup'
-
+import Button from 'react-bootstrap/Button'
+import TodosData from './TodosData'
 export class TodoTask extends React.Component{
-constructor(props){
-    super(props)
-    
-}
+
 
 
 state={
     completed:this.props.completed,
+   
 };
 
      checkBoxClick=()=>{
@@ -20,17 +18,40 @@ state={
             completed: !this.state.completed
         }));
 
-       
+    
+      
        
     }
 
 
+  
+   handleDeleteItem=()=>{
+   
+  
+    
+    const resultId=TodosData.findIndex(element => element.id===this.props.element.id)
+  
+    
+    if(resultId!=undefined)
+    TodosData.splice(resultId,1)
+       this.props.deleteItem()
+      
+       this.forceUpdate()
+       this.props.deleteItem()
+   }
+      
     render(){
-        let x=<ListGroup.Item>{this.props.element.text}</ListGroup.Item>
+let y=this.props.element.text
+
+        let x=<ListGroup.Item>{y}</ListGroup.Item>
         if(this.state.completed){
-            x=<ListGroup.Item variant="success">{this.props.element.text}</ListGroup.Item>
+            x=<ListGroup.Item variant="success">{y}</ListGroup.Item>
         }
 
+      
+
+   
+        
         return (
             <div className="center">
                 <InputGroup className="mb-3">
@@ -39,9 +60,15 @@ state={
  
     </InputGroup.Prepend>
      {x}
+     <InputGroup.Append>
+    <Button className="del" variant="danger" onClick={this.handleDeleteItem}>Delete</Button>
+    </InputGroup.Append>
+  
   </InputGroup>
+ 
   
             </div>
+
         )
     }
 
